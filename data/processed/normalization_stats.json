@@ -1,0 +1,60 @@
+{
+  "features": [
+    "acc_mag_mean",
+    "acc_mag_std",
+    "acc_rms",
+    "acc_sma",
+    "acc_ptp",
+    "gyr_mag_std",
+    "gyr_sma",
+    "acc_corr_yz",
+    "tilt_deg",
+    "vert_dom_freq",
+    "vert_spectral_energy",
+    "vert_spectral_entropy",
+    "vert_band_ratio",
+    "gyr_dom_freq"
+  ],
+  "log_features": [
+    "acc_mag_mean",
+    "acc_mag_std",
+    "acc_rms",
+    "acc_sma",
+    "acc_ptp",
+    "gyr_mag_std",
+    "gyr_sma",
+    "vert_spectral_energy"
+  ],
+  "mean": {
+    "acc_mag_mean": -0.33912613748216486,
+    "acc_mag_std": -0.7887366727479718,
+    "acc_rms": -0.30612719069798655,
+    "acc_sma": -0.19103605524137082,
+    "acc_ptp": -0.07603800500587193,
+    "gyr_mag_std": -1.4422018156735585,
+    "gyr_sma": -0.9516276504478488,
+    "acc_corr_yz": 0.0508022927995197,
+    "tilt_deg": 12.487173150444946,
+    "vert_dom_freq": 4.338821490467938,
+    "vert_spectral_energy": 0.4235858305715034,
+    "vert_spectral_entropy": 0.5203609492768376,
+    "vert_band_ratio": 0.5141070134526319,
+    "gyr_dom_freq": 3.7885615251299827
+  },
+  "std": {
+    "acc_mag_mean": 0.9884064431688415,
+    "acc_mag_std": 1.118915655428196,
+    "acc_rms": 0.9982425677252071,
+    "acc_sma": 0.9989841263989296,
+    "acc_ptp": 1.118452150524587,
+    "gyr_mag_std": 1.2255923570256566,
+    "gyr_sma": 1.2143837090306238,
+    "acc_corr_yz": 0.29824298949447536,
+    "tilt_deg": 7.8643986038270945,
+    "vert_dom_freq": 3.7569139956300157,
+    "vert_spectral_energy": 2.467208301701423,
+    "vert_spectral_entropy": 0.12979887633217652,
+    "vert_band_ratio": 0.30630607779650826,
+    "gyr_dom_freq": 3.7828181534525123
+  }
+}
