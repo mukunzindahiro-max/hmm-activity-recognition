@@ -11,6 +11,7 @@ TEST_DIR = ROOT / "data" / "test"
 
 ACTIVITIES = ["standing", "walking", "jumping", "still"]
 PARTICIPANT = "james"
+MAX_CLIP_S = 10.0
 
 SENSORS = {
     "Accelerometer.csv": "acc",
@@ -65,6 +66,16 @@ def merge_sensors(folder: Path) -> pd.DataFrame:
     return merged
 
 
+def trim_to_max_duration(df: pd.DataFrame, max_s: float = MAX_CLIP_S) -> pd.DataFrame:
+    seconds = (df["time"] - df["time"].iloc[0]) / 1e9
+    excess = seconds.iloc[-1] - max_s
+    if excess <= 0:
+        return df
+    start = excess / 2
+    keep = (seconds >= start) & (seconds <= start + max_s)
+    return df[keep].reset_index(drop=True)
+
+
 def finalise(df: pd.DataFrame, meta: dict) -> pd.DataFrame:
     df = df.copy()
     df["seconds_elapsed"] = (df["time"] - df["time"].iloc[0]) / 1e9
@@ -91,7 +102,7 @@ def build_training_clips() -> pd.DataFrame:
             raise ValueError(f"Unknown activity in folder name: {folder.name}")
 
         meta = read_metadata(folder)
-        df = merge_sensors(folder)
+        df = trim_to_max_duration(merge_sensors(folder))
         df["activity"] = activity
         df = finalise(df, meta)
 

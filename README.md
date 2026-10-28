@@ -12,17 +12,20 @@ scratch in NumPy.
 | Device | iPhone 13 (iOS 26.5) |
 | Sensors | Accelerometer (x, y, z), Gyroscope (x, y, z), Gravity (x, y, z) |
 | Sampling rate | 100 Hz (10 ms interval) |
-| Training clips | 80 (20 per activity, 8.7 – 11.5 s each) |
+| Training clips | 80 (20 per activity, 8.7 – 10.0 s each) |
 | Test sessions | 2 continuous sessions of about 40 s (all four activities) |
 
 Recording time per activity (training):
 
 | Activity | Clips | Total duration |
 |---|---|---|
-| Standing | 20 | 200.4 s |
-| Walking | 20 | 214.8 s |
+| Standing | 20 | 193.7 s |
+| Walking | 20 | 199.7 s |
 | Jumping | 20 | 186.8 s |
-| Still | 20 | 215.4 s |
+| Still | 20 | 199.7 s |
+
+Clips longer than 10 s are trimmed equally from both ends, which also removes the
+phone-tap at the start and end of each recording.
 
 ## Repository structure
 
