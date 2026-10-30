@@ -1,8 +1,9 @@
 # Human Activity Recognition with Hidden Markov Models
 
-Formative 2: recognising **standing, walking, jumping and still** from smartphone
-accelerometer and gyroscope data, using a Hidden Markov Model implemented from
-scratch in NumPy.
+**Mukunzi Ndahiro James** · Machine Learning Techniques II · Formative 2 (individual)
+
+Recognising **standing, walking, jumping and still** from smartphone accelerometer
+and gyroscope data, using a Hidden Markov Model implemented from scratch in NumPy.
 
 ## Data collection
 
@@ -72,7 +73,9 @@ Implemented from scratch in NumPy (`src/hmm.py`):
 
 State means are seeded from the labelled training windows so each hidden state keeps
 its activity meaning; π, A and the covariances start uniform/pooled and are learned by
-Baum–Welch. The forward, Viterbi and posterior computations are verified against
+Baum–Welch. The 80 single-activity clips are shuffled (fixed seed) and joined into 20
+sessions of 4 clips, so A learns how long activities last (self-transitions 0.87–0.91,
+about 9.5 s per activity). The forward, Viterbi and posterior computations are verified against
 brute-force enumeration in the notebook.
 
 ```bash
@@ -104,7 +107,6 @@ data/
   raw/                     cleaned, labelled training clips (<activity>_<NN>.csv)
   test/                    unseen continuous test sessions (mixed_<NN>.csv)
   processed/               normalised features, normalisation statistics and the trained model
-  dataset_summary.csv      samples, duration and sampling rate of every file
 src/
   preprocessing.py         resampling, filtering, edge trimming and windowing
   features.py              time and frequency features, Z-score normalisation

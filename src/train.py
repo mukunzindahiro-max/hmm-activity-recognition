@@ -14,6 +14,8 @@ HMM_CONFIG = {
     "min_covar": 1e-2,
     "transition_prior": 1.0,
 }
+CLIPS_PER_SESSION = 4
+CHAIN_SEED = 0
 
 
 def to_sequences(features: pd.DataFrame) -> tuple:
@@ -24,6 +26,15 @@ def to_sequences(features: pd.DataFrame) -> tuple:
         labels.append(df["activity"].to_numpy())
         files.append(file)
     return sequences, labels, files
+
+
+def chain_clips(sequences: list, labels: list, clips_per_session: int = CLIPS_PER_SESSION,
+                seed: int = CHAIN_SEED) -> tuple:
+    order = np.random.default_rng(seed).permutation(len(sequences))
+    sessions = [order[i:i + clips_per_session] for i in range(0, len(order), clips_per_session)]
+    chained_X = [np.vstack([sequences[i] for i in s]) for s in sessions]
+    chained_y = [np.concatenate([labels[i] for i in s]) for s in sessions]
+    return chained_X, chained_y
 
 
 def initialise(model: GaussianHMM, sequences: list, labels: list) -> GaussianHMM:
@@ -37,7 +48,7 @@ def initialise(model: GaussianHMM, sequences: list, labels: list) -> GaussianHMM
 
 
 def train_hmm(train_features: pd.DataFrame, verbose: bool = False, save: bool = True) -> GaussianHMM:
-    sequences, labels, _ = to_sequences(train_features)
+    sequences, labels = chain_clips(*to_sequences(train_features)[:2])
     model = GaussianHMM(ACTIVITIES, verbose=verbose, **HMM_CONFIG)
     initialise(model, sequences, labels)
     model.fit(sequences)

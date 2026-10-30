@@ -155,10 +155,6 @@ def main() -> None:
     train = build_training_clips()
     test = build_test_sessions()
 
-    pd.concat([train, test], ignore_index=True).to_csv(
-        ROOT / "data" / "dataset_summary.csv", index=False
-    )
-
     print(f"Training clips written to {RAW_DIR.relative_to(ROOT)}: {len(train)}")
     totals = train.groupby("activity")["duration_s"].agg(["count", "sum", "min", "max"])
     print(totals.round(2).to_string())
